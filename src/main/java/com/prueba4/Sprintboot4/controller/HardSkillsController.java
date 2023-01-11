@@ -5,6 +5,8 @@ import com.prueba4.Sprintboot4.model.HardSkillsModel;
 import com.prueba4.Sprintboot4.service.HardSkillsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,19 +43,21 @@ public class HardSkillsController {
     
 
     @PostMapping("/new")
-    public String agregarHard(@RequestBody HardSkillsModel hard) {
+    public ResponseEntity agregarHard(@RequestBody HardSkillsModel hard) {
         hardServ.crearHardSkills(hard);
-        return "La habilidad fue agregada correctamente";
+        return ResponseEntity.ok().body(hard);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String eliminarHard(@PathVariable Long id) {
+    public ResponseEntity eliminarHard(@PathVariable Long id) {
         hardServ.deleteHardSkills(id);
-        return "La habilidad fue borrada correctamente";
+        return new ResponseEntity(HttpStatus.OK);
  }
     
     @PutMapping("/update")
-    public void updateHard(@RequestBody HardSkillsModel hard){
+    public ResponseEntity updateHard(@RequestBody HardSkillsModel hard){
         hardServ.crearHardSkills(hard);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
+ 

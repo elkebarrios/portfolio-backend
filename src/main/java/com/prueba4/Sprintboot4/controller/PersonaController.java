@@ -5,6 +5,8 @@ import com.prueba4.Sprintboot4.model.PersonaModel;
 import com.prueba4.Sprintboot4.service.PersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,20 +41,21 @@ public class PersonaController {
     
 
     @PostMapping("/new")
-    public String agregarPersona(@RequestBody PersonaModel pers) {
+    public ResponseEntity agregarPersona(@RequestBody PersonaModel pers) {
         persoServ.crearPersona(pers);
-        return "La persona fue agregada correctamente";
+        return ResponseEntity.ok().body(pers);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String eliminarPersona(@PathVariable Long id) {
+    public ResponseEntity eliminarPersona(@PathVariable Long id) {
         persoServ.deletePersona(id);
-        return "La persona fue borrada correctamente";
+        return new ResponseEntity(HttpStatus.OK);
  }
     
     @PutMapping("/update")
-    public void updatePersona(@RequestBody PersonaModel pers){
+    public ResponseEntity updatePersona(@RequestBody PersonaModel pers){
         persoServ.crearPersona(pers);
+        return new ResponseEntity(HttpStatus.OK);
     }
     
 /*@PutMapping("/persona/editar/{id}")

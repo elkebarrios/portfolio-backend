@@ -5,6 +5,8 @@ import com.prueba4.Sprintboot4.model.ProyectoModel;
 import com.prueba4.Sprintboot4.service.ProyectoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,19 +41,20 @@ public class ProyectoController {
     
 
     @PostMapping("/new")
-    public String agregarProyecto(@RequestBody ProyectoModel pro) {
+    public ResponseEntity agregarProyecto(@RequestBody ProyectoModel pro) {
         proServ.crearProyecto(pro);
-        return "El proyecto fue agregado correctamente";
+       return ResponseEntity.ok().body(pro);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String eliminarProyecto(@PathVariable Long id) {
+    public ResponseEntity eliminarProyecto(@PathVariable Long id) {
         proServ.deleteProyecto(id);
-        return "El proyecto fue borrado correctamente";
+       return new ResponseEntity(HttpStatus.OK);
  }
     
     @PutMapping("/update")
-    public void updateProyecton(@RequestBody ProyectoModel pro){
+    public ResponseEntity updateProyecton(@RequestBody ProyectoModel pro){
         proServ.crearProyecto(pro);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

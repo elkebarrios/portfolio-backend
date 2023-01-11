@@ -5,6 +5,8 @@ import com.prueba4.Sprintboot4.model.ExperienciaModel;
 import com.prueba4.Sprintboot4.service.ExperienciaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,19 +41,20 @@ public class ExperienciaController {
     
 
     @PostMapping("/new")
-    public String agregarExperiencia(@RequestBody ExperienciaModel exp) {
+    public ResponseEntity agregarExperiencia(@RequestBody ExperienciaModel exp) {
         expServ.crearExperiencia(exp);
-        return "La experiencia fue agregada correctamente";
+        return ResponseEntity.ok().body(exp);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String eliminarExperiencia(@PathVariable Long id) {
+    public ResponseEntity eliminarExperiencia(@PathVariable Long id) {
         expServ.deleteExperiencia(id);
-        return "La experiencia fue borrada correctamente";
+        return new ResponseEntity(HttpStatus.OK);
  }
     
     @PutMapping("/update")
-    public void updateExperiencia(@RequestBody ExperienciaModel exp){
+    public ResponseEntity updateExperiencia(@RequestBody ExperienciaModel exp){
         expServ.crearExperiencia(exp);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

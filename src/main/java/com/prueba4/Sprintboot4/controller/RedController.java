@@ -5,6 +5,8 @@ import com.prueba4.Sprintboot4.model.RedModel;
 import com.prueba4.Sprintboot4.service.RedService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,20 +42,21 @@ public class RedController {
     
 
     @PostMapping("/new")
-    public String agregaRed(@RequestBody RedModel red) {
+    public ResponseEntity  agregaRed(@RequestBody RedModel red) {
         redServ.crearRed(red);
-        return "La red fue agregada correctamente";
+        return ResponseEntity.ok().body(red);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String eliminarRed(@PathVariable Long id) {
+    public ResponseEntity eliminarRed(@PathVariable Long id) {
         redServ.deleteRed(id);
-        return "La red fue borrada correctamente";
+       return new ResponseEntity(HttpStatus.OK);
  }
     
     @PutMapping("/update")
-    public void updateRed(@RequestBody RedModel red){
+    public ResponseEntity updateRed(@RequestBody RedModel red){
         redServ.crearRed(red);
+        return new ResponseEntity(HttpStatus.OK);
     }
     
 }

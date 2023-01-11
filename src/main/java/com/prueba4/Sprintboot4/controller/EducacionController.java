@@ -5,6 +5,8 @@ import com.prueba4.Sprintboot4.model.EducacionModel;
 import com.prueba4.Sprintboot4.service.EducacionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,26 +35,27 @@ public class EducacionController {
     
     @GetMapping ("/ver/{id}")
     @ResponseBody
-    public EducacionModel verEducacion(@PathVariable Long id){
+    public  EducacionModel verEducacion(@PathVariable Long id){
         return eduServ.findEducacion(id);
     }
     
 
     @PostMapping("/new")
-    public String agregarEducacion(@RequestBody EducacionModel edu) {
+    public ResponseEntity agregarEducacion(@RequestBody EducacionModel edu) {
         eduServ.crearEducacion(edu);
-        return "La educación fue agregada correctamente";
+        return ResponseEntity.ok().body(edu);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String eliminarEducacion(@PathVariable Long id) {
+    public ResponseEntity eliminarEducacion(@PathVariable Long id) {
         eduServ.deleteEducacion(id);
-        return "La educación fue borrada correctamente";
+        return new ResponseEntity(HttpStatus.OK);
  }
     
     @PutMapping("/update")
-    public void updateEducacion(@RequestBody EducacionModel edu){
+    public ResponseEntity updateEducacion(@RequestBody EducacionModel edu){
         eduServ.crearEducacion(edu);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
 
