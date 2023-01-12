@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.prueba4.Sprintboot4.Sprintboot4ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.304 s - in com.prueba4.Sprintboot4.Sprintboot4ApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.651 s - in com.prueba4.Sprintboot4.Sprintboot4ApplicationTests
